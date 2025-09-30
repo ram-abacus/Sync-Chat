@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sync Chat — Secure, Self‑Hosted Enterprise Messaging</title>
+  <meta name="description" content="Sync Chat is an enterprise-grade, self‑hosted chat platform with DMs, channels, voice/video, file sharing, admin controls, and deep integrations. Request a demo."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --brand:#2aa160; --dark:#0b0f0d; --muted:#6b7280; --bg:#f6fbf8; --card:#ffffff; --ring: rgba(42,161,96,.18);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;color:#19211f;}
+    a{color:var(--brand);text-decoration:none}
+    .container{max-width:1180px;margin:0 auto;padding:0 20px}
+    /* Header */
+    header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #ecf1ee}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800}
+    .brand img{height:36px}
+    .nav a{margin:0 10px;color:#1f2937;font-weight:600}
+    .cta{background:var(--brand);color:#fff;border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 8px 20px var(--ring)}
+    .cta.outline{background:#e9f7ef;color:var(--brand)}
+    /* Hero */
+    .hero{background:linear-gradient(180deg,#ffffff, var(--bg) 60%);}
+    .hero-inner{display:grid;grid-template-columns:1.25fr .95fr;gap:40px;padding:80px 0}
+    /* Fix heading visibility by ensuring proper contrast and positioning */
+    .hero h1{font-size:48px;line-height:1.05;margin:12px 0 10px;color:#19211f;font-weight:800;z-index:1;position:relative}
+    .hero p{font-size:18px;color:#45514d;max-width:680px}
+    .hero-card{background:#fff;border:1px solid #ecf1ee;border-radius:16px;padding:22px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+    .hero-list{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 24px}
+    .pill{font-size:13px;padding:8px 12px;border-radius:999px;background:#e9f7ef;color:#0f5132;border:1px solid #d1efe0}
+    
+    /* Add Mautic form styling to match existing design */
+    .mauticform_wrapper .mauticform-input, 
+    .mauticform_wrapper select, 
+    .mauticform_wrapper textarea{
+      width:100%;
+      padding:14px 12px;
+      border:1px solid #e3ece8;
+      border-radius:10px;
+      margin:8px 0 14px;
+      font-size:15px;
+      font-family:inherit;
+    }
+    .mauticform_wrapper .mauticform-label{
+      font-size:13px;
+      color:#56635f;
+      display:block;
+      margin-bottom:4px;
+    }
+    .mauticform_wrapper .mauticform-checkboxgrp .mauticform-label{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:14px;
+      margin:8px 0;
+    }
+    .mauticform_wrapper .mauticform-checkboxgrp-checkbox{
+      width:auto;
+      margin:0;
+    }
+    .mauticform_wrapper .mauticform-button{
+      background:var(--brand);
+      color:#fff;
+      border:none;
+      padding:12px 18px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+      box-shadow:0 8px 20px var(--ring);
+      font-family:inherit;
+    }
+    .mauticform_wrapper .mauticform-errormsg{
+      color:#dc2626;
+      font-size:12px;
+      margin-top:4px;
+    }
+    
+    form input, form textarea, select{width:100%;padding:14px 12px;border:1px solid #e3ece8;border-radius:10px;margin:8px 0 14px;font-size:15px}
+    form label{font-size:13px;color:#56635f}
+    .note{font-size:12px;color:#667a73}
+    /* Logos */
+    .logos{padding:28px 0 8px;border-top:1px solid #ecf1ee;border-bottom:1px solid #ecf1ee;background:#fff}
+    .logo-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:22px;align-items:center}
+    .logo{height:30px;opacity:.7;filter:grayscale(100%)}
+    /* Sections */
+    section{padding:80px 0}
+    h2.section-title{font-size:36px;margin:0 0 12px}
+    .sub{color:#56635f;max-width:760px}
+    /* Features grid */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:26px}
+    .card{background:var(--card);border:1px solid #ecf1ee;border-radius:16px;padding:22px;box-shadow:0 10px 24px rgba(0,0,0,.05)}
+    .card h3{margin:0 0 6px;font-size:18px}
+    .badge{display:inline-block;background:#e9f7ef;color:#0f5132;border:1px solid #d1efe0;border-radius:999px;padding:6px 10px;font-size:12px;margin:6px 8px 0 0}
+    /* Split */
+    .split{display:grid;grid-template-columns:1.1fr 1fr;gap:34px;align-items:center}
+    .list li{margin:10px 0}
+    .list li::marker{color:var(--brand)}
+    /* Compare table */
+    table{width:100%;border-collapse:separate;border-spacing:0 10px}
+    th,td{padding:14px 16px;text-align:left}
+    tr{background:#fff;border:1px solid #ecf1ee}
+    th{background:#f2faf5}
+    /* FAQ */
+    details{background:#fff;border:1px solid #ecf1ee;border-radius:12px;padding:14px 16px;margin:10px 0}
+    summary{cursor:pointer;font-weight:700}
+    /* Footer */
+    footer{background:#0d1513;color:#b8c6c0;padding:40px 0}
+    .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:20px}
+    .kicker{font-weight:800;color:var(--brand)}
+    .mini{font-size:12px;color:#7d8c86}
+    @media(max-width:980px){
+      .hero-inner,.split{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .logo-grid{grid-template-columns:repeat(3,1fr)}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top"><img src="Logo.png" alt="Sync Chat Logo"/> <span>SYNCCHAT</span></a>
+      <nav class="hide-sm">
+        <a href="#features">Features</a>
+        <a href="#security">Security</a>
+        <a href="#deploy">Deployment</a>
+        <a href="#integrations">Integrations</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="#demo" class="cta">Request a Demo</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="container hero-inner">
+      <div>
+        <span class="kicker">Secure. Self‑Hosted. Enterprise‑Ready.</span>
+        <h1>Private Team Communication <br/>that Scales With You</h1>
+        <p>Sync Chat unifies DMs, channels, threads, voice/video, and file sharing with granular admin controls and enterprise‑grade security. Deploy on‑premise or private cloud and keep <strong>100% ownership</strong> of your data.</p>
+        <div class="hero-list">
+          <span class="pill">E2E encryption</span>
+          <span class="pill">SSO / MFA</span>
+          <span class="pill">APIs & Webhooks</span>
+          <span class="pill">Audit Logs</span>
+          <span class="pill">On‑prem / Private Cloud</span>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:16px">
+          <a class="cta" href="#demo">Get a Personalized Demo</a>
+          <a class="cta outline" href="#features">Explore Features</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3 style="margin:0 0 6px">See Sync Chat in action</h3>
+        <p class="mini" style="margin:0 0 12px">Share a few details and our product expert will reach out within 24 hours.</p>
+        <!-- Replace existing form with Mautic form placeholder -->
+        <div id="mauticform_wrapper_yourformid" class="mauticform_wrapper">
+          <form autocomplete="false" role="form" method="post" action="https://your-mautic-domain.com/form/submit?formId=YOUR_FORM_ID" id="mauticform_yourformid" data-mautic-form="yourformid" enctype="multipart/form-data">
+            <div class="mauticform-error" id="mauticform_yourformid_error"></div>
+            <div class="mauticform-message" id="mauticform_yourformid_message"></div>
+            <div class="mauticform-innerform">
+              
+              <div class="mauticform-page-wrapper mauticform-page-1" data-mautic-form-page="1">
+                <div id="mauticform_yourformid_full_name" class="mauticform-row mauticform-text mauticform-field-1">
+                  <label id="mauticform_label_yourformid_full_name" for="mauticform_input_yourformid_full_name" class="mauticform-label">Full Name</label>
+                  <input id="mauticform_input_yourformid_full_name" name="mauticform[full_name]" value="" placeholder="Your name" class="mauticform-input" type="text" required />
+                  <span class="mauticform-errormsg" style="display: none;">This field is required.</span>
+                </div>
+
+                <div id="mauticform_yourformid_email" class="mauticform-row mauticform-email mauticform-field-2">
+                  <label id="mauticform_label_yourformid_email" for="mauticform_input_yourformid_email" class="mauticform-label">Business Email</label>
+                  <input id="mauticform_input_yourformid_email" name="mauticform[email]" value="" placeholder="name@company.com" class="mauticform-input" type="email" required />
+                  <span class="mauticform-errormsg" style="display: none;">This field is required.</span>
+                </div>
+
+                <div id="mauticform_yourformid_company" class="mauticform-row mauticform-text mauticform-field-3">
+                  <label id="mauticform_label_yourformid_company" for="mauticform_input_yourformid_company" class="mauticform-label">Company</label>
+                  <input id="mauticform_input_yourformid_company" name="mauticform[company]" value="" placeholder="Company name" class="mauticform-input" type="text" required />
+                  <span class="mauticform-errormsg" style="display: none;">This field is required.</span>
+                </div>
+
+                <div id="mauticform_yourformid_team_size" class="mauticform-row mauticform-select mauticform-field-4">
+                  <label id="mauticform_label_yourformid_team_size" for="mauticform_input_yourformid_team_size" class="mauticform-label">Team Size</label>
+                  <select id="mauticform_input_yourformid_team_size" name="mauticform[team_size]" class="mauticform-input">
+                    <option value="">Select team size</option>
+                    <option value="10-50">10–50</option>
+                    <option value="51-200">51–200</option>
+                    <option value="201-1000">201–1000</option>
+                    <option value="1000+">1000+</option>
+                  </select>
+                </div>
+
+                <div id="mauticform_yourformid_use_case" class="mauticform-row mauticform-textarea mauticform-field-5">
+                  <label id="mauticform_label_yourformid_use_case" for="mauticform_input_yourformid_use_case" class="mauticform-label">Use Case</label>
+                  <textarea id="mauticform_input_yourformid_use_case" name="mauticform[use_case]" placeholder="e.g., secure collaboration for remote engineering" class="mauticform-input" rows="3"></textarea>
+                </div>
+
+                <div id="mauticform_yourformid_agreement" class="mauticform-row mauticform-checkboxgrp mauticform-field-6">
+                  <label class="mauticform-label">
+                    <input class="mauticform-checkboxgrp-checkbox" name="mauticform[agreement]" id="mauticform_checkboxgrp_checkbox_agreement_1" type="checkbox" value="1" checked />
+                    I agree to be contacted about Sync Chat.
+                  </label>
+                </div>
+
+                <div id="mauticform_yourformid_submit" class="mauticform-row mauticform-button-wrapper mauticform-field-7">
+                  <button type="submit" name="mauticform[submit]" id="mauticform_input_yourformid_submit" value="" class="mauticform-button cta" style="width:100%;margin-top:8px">Request Demo</button>
+                </div>
+              </div>
+            </div>
+
+            <input type="hidden" name="mauticform[formId]" id="mauticform_yourformid_id" value="YOUR_FORM_ID" />
+            <input type="hidden" name="mauticform[return]" id="mauticform_yourformid_return" value="" />
+            <input type="hidden" name="mauticform[formName]" id="mauticform_yourformid_name" value="yourformid" />
+          </form>
+        </div>
+        <div class="note">No spam. We'll only use your details for this inquiry.</div>
+        
+        <!-- Add Mautic tracking script -->
+        <script type="text/javascript">
+          if (typeof MauticSDKLoaded == 'undefined') {
+            var MauticSDKLoaded = true;
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://your-mautic-domain.com/media/js/mautic-form.js?v1234567890';
+            script.onload = function() {
+              MauticSDK.onLoad();
+            };
+            head.appendChild(script);
+            var MauticDomain = 'https://your-mautic-domain.com';
+            var MauticLang = {
+              'submittingMessage': "Please wait..."
+            }
+          }
+        </script>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social proof / client logos -->
+  <section class="logos" aria-label="Client Logos">
+    <div class="container">
+      <div class="mini" style="text-align:center;margin-bottom:14px;color:#51615b">Trusted by security‑first teams</div>
+      <div class="logo-grid">
+        <img class="logo" src="https://dummyimage.com/140x30/cccccc/ffffff&text=CLIENT+1" alt="Client 1"/>
+        <img class="logo" src="https://dummyimage.com/140x30/cccccc/ffffff&text=CLIENT+2" alt="Client 2"/>
+        <img class="logo" src="https://dummyimage.com/140x30/cccccc/ffffff&text=CLIENT+3" alt="Client 3"/>
+        <img class="logo" src="https://dummyimage.com/140x30/cccccc/ffffff&text=CLIENT+4" alt="Client 4"/>
+        <img class="logo" src="https://dummyimage.com/140x30/cccccc/ffffff&text=CLIENT+5" alt="Client 5"/>
+        <img class="logo" src="https://dummyimage.com/140x30/cccccc/ffffff&text=CLIENT+6" alt="Client 6"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- RTB / Value props -->
+  <section id="rtb">
+    <div class="container">
+      <h2 class="section-title">Reasons to Choose Sync Chat</h2>
+      <p class="sub">Clarity for decision‑makers: the concrete advantages your IT, compliance, and business teams care about.</p>
+      <div class="grid-3">
+        <div class="card"><h3>Complete Data Ownership</h3><p>Self‑host on your servers or private cloud. Choose data residency, set retention policies, and export on demand.</p><span class="badge">On‑prem</span><span class="badge">Private Cloud</span></div>
+        <div class="card"><h3>Enterprise‑Grade Security</h3><p>E2E encryption for private messages, TLS in transit, SSO/MFA, RBAC, IP whitelisting, device controls, and audit logs.</p><span class="badge">MFA</span><span class="badge">SSO</span><span class="badge">RBAC</span></div>
+        <div class="card"><h3>Built to Scale</h3><p>WebSockets, load balancing, horizontal scaling with Kubernetes and NATS. Optimized MongoDB for real‑time chat.</p><span class="badge">HA/DR</span><span class="badge">Autoscale</span></div>
+        <div class="card"><h3>Deep Integrations</h3><p>APIs & webhooks to connect CRMs, ITSM, project tools, and custom workflows. External guest access with controls.</p><span class="badge">APIs</span><span class="badge">Webhooks</span></div>
+        <div class="card"><h3>Admin Control</h3><p>Comprehensive dashboard for users, roles, channels, policies, backups, and compliance exports.</p><span class="badge">Audit Ready</span></div>
+        <div class="card"><h3>User‑Loved Experience</h3><p>DMs, public/private channels, threads, mentions, rich editor, reactions, voice/video, and powerful search.</p><span class="badge">Threads</span><span class="badge">Voice/Video</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features deep dive -->
+  <section id="features" style="background:var(--bg)">
+    <div class="container">
+      <div class="split">
+        <div>
+          <h2 class="section-title">Messaging that Fits Every Workflow</h2>
+          <p class="sub">Organize work with channels and threads, keep private conversations secure with DMs, and collaborate faster using file previews and reactions.</p>
+          <ul class="list">
+            <li>Direct messages, public channels, private groups, and guest accounts</li>
+            <li>Threads, mentions, notifications, and global search</li>
+            <li>Drag‑drop file sharing with previews and version clarity</li>
+            <li>One‑click voice & video calls for quick decisions</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What users get</h3>
+          <p>Simple, fast, and reliable collaboration that reduces context switching and keeps teams focused.</p>
+          <div class="badge">Markdown Editor</div>
+          <div class="badge">Reactions & Emojis</div>
+          <div class="badge">Pinned Messages</div>
+          <div class="badge">Presence & Status</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deployment options -->
+  <section id="deploy">
+    <div class="container">
+      <h2 class="section-title">Deploy Your Way</h2>
+      <p class="sub">On‑premise, private cloud, or hybrid. Docker/Kubernetes supported for quick rollouts and elastic scaling.</p>
+      <div class="grid-3">
+        <div class="card"><h3>On‑Premise</h3><p>Full control within your network, ideal for regulated industries and data‑sovereignty needs.</p></div>
+        <div class="card"><h3>Private Cloud</h3><p>Dedicated instances on AWS, Azure, or GCP with strict tenancy and cost efficiency.</p></div>
+        <div class="card"><h3>Hybrid</h3><p>Keep sensitive data on‑prem while collaborating with partners through secure cloud edges.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security & Compliance -->
+  <section id="security" style="background:var(--bg)">
+    <div class="container">
+      <div class="split">
+        <div>
+          <h2 class="section-title">Security, Compliance, and Governance</h2>
+          <p class="sub">Protect conversations end‑to‑end while meeting compliance requirements across teams and geographies.</p>
+          <ul class="list">
+            <li>End‑to‑end encryption for private messages + TLS in transit</li>
+            <li>SSO/OAuth, LDAP/AD, MFA/2FA, RBAC, and granular permissions</li>
+            <li>Audit logs, retention policies, legal hold & export options</li>
+            <li>IP whitelisting, device management, account lockout policies</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Ready for your audits</h3>
+          <p>Built with OWASP mitigations, SAST, and regular pen‑tests. Optional HA/DR, encrypted backups, and monitoring.</p>
+          <div class="badge">OWASP</div>
+          <div class="badge">SAST</div>
+          <div class="badge">Pen‑Testing</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integrations -->
+  <section id="integrations">
+    <div class="container">
+      <h2 class="section-title">Connect Your Tools</h2>
+      <p class="sub">APIs & webhooks make Sync Chat the hub for your workflows — CRM, project management, ticketing, and more.</p>
+      <div class="grid-3">
+        <div class="card"><h3>CRMs</h3><p>Push leads/updates, get alerts in channels, and track conversations.</p></div>
+        <div class="card"><h3>Project Tools</h3><p>Sync tasks, commits, and releases. Announce deploys in real‑time.</p></div>
+        <div class="card"><h3>IT & Support</h3><p>Create/resolve tickets, route incidents to on‑call channels automatically.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section id="compare" style="background:var(--bg)">
+    <div class="container">
+      <h2 class="section-title">Why not WhatsApp/Generic SaaS?</h2>
+      <p class="sub">Consumer apps and shared‑tenant SaaS can’t meet enterprise control or compliance needs. Sync Chat does.</p>
+      <table>
+        <thead>
+          <tr><th>Capability</th><th>WhatsApp/Generic</th><th>Sync Chat</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Data Ownership</td><td>Limited / shared</td><td><strong>100% owned, exportable</strong></td></tr>
+          <tr><td>Deployment</td><td>Vendor‑hosted only</td><td><strong>On‑prem / Private cloud / Hybrid</strong></td></tr>
+          <tr><td>Compliance & Audit</td><td>Basic</td><td><strong>Audit logs, retention, legal hold</strong></td></tr>
+          <tr><td>Access Control</td><td>Coarse</td><td><strong>RBAC + granular permissions</strong></td></tr>
+          <tr><td>Guest/Partner Access</td><td>Workarounds</td><td><strong>Secure external channels</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <div class="container">
+      <h2 class="section-title">What Teams Say</h2>
+      <div class="grid-3">
+        <div class="card"><p>“Sync Chat gave us on‑prem control without sacrificing UX. Rollout in under two weeks.”</p><p class="mini">Head of IT, Manufacturing</p></div>
+        <div class="card"><p>“Audit logs + retention policies made our compliance team happy from day one.”</p><p class="mini">CISO, Financial Services</p></div>
+        <div class="card"><p>“APIs let us tie support tickets and deploy alerts directly into project channels.”</p><p class="mini">Engineering Manager, SaaS</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA block -->
+  <section id="demo" style="background:linear-gradient(180deg,var(--bg),#ffffff)">
+    <div class="container split">
+      <div>
+        <h2 class="section-title">Ready to see Sync Chat?</h2>
+        <p class="sub">Book a walkthrough tailored to your security and workflow needs. We’ll map your use cases and share a deployment plan.</p>
+        <ul class="list">
+          <li>Personalized demo for your stakeholders</li>
+          <li>Architecture & deployment options</li>
+          <li>Security & compliance deep‑dive</li>
+        </ul>
+      </div>
+      <div class="card">
+        <!-- Replace second form with Mautic form as well -->
+        <div id="mauticform_wrapper_demoformid" class="mauticform_wrapper">
+          <form autocomplete="false" role="form" method="post" action="https://your-mautic-domain.com/form/submit?formId=YOUR_DEMO_FORM_ID" id="mauticform_demoformid" data-mautic-form="demoformid" enctype="multipart/form-data">
+            <div class="mauticform-error" id="mauticform_demoformid_error"></div>
+            <div class="mauticform-message" id="mauticform_demoformid_message"></div>
+            <div class="mauticform-innerform">
+              
+              <div class="mauticform-page-wrapper mauticform-page-1" data-mautic-form-page="1">
+                <div id="mauticform_demoformid_full_name" class="mauticform-row mauticform-text mauticform-field-1">
+                  <input id="mauticform_input_demoformid_full_name" name="mauticform[full_name]" value="" placeholder="Full Name" class="mauticform-input" type="text" required />
+                  <span class="mauticform-errormsg" style="display: none;">This field is required.</span>
+                </div>
+
+                <div id="mauticform_demoformid_email" class="mauticform-row mauticform-email mauticform-field-2">
+                  <input id="mauticform_input_demoformid_email" name="mauticform[email]" value="" placeholder="Business Email" class="mauticform-input" type="email" required />
+                  <span class="mauticform-errormsg" style="display: none;">This field is required.</span>
+                </div>
+
+                <div id="mauticform_demoformid_company" class="mauticform-row mauticform-text mauticform-field-3">
+                  <input id="mauticform_input_demoformid_company" name="mauticform[company]" value="" placeholder="Company" class="mauticform-input" type="text" required />
+                  <span class="mauticform-errormsg" style="display: none;">This field is required.</span>
+                </div>
+
+                <div id="mauticform_demoformid_phone" class="mauticform-row mauticform-text mauticform-field-4">
+                  <input id="mauticform_input_demoformid_phone" name="mauticform[phone]" value="" placeholder="Phone (optional)" class="mauticform-input" type="text" />
+                </div>
+
+                <div id="mauticform_demoformid_goals" class="mauticform-row mauticform-textarea mauticform-field-5">
+                  <textarea id="mauticform_input_demoformid_goals" name="mauticform[goals]" placeholder="Tell us your primary goals" class="mauticform-input" rows="3"></textarea>
+                </div>
+
+                <div id="mauticform_demoformid_submit" class="mauticform-row mauticform-button-wrapper mauticform-field-6">
+                  <button type="submit" name="mauticform[submit]" id="mauticform_input_demoformid_submit" value="" class="mauticform-button cta" style="width:100%">Schedule My Demo</button>
+                </div>
+              </div>
+            </div>
+
+            <input type="hidden" name="mauticform[formId]" id="mauticform_demoformid_id" value="YOUR_DEMO_FORM_ID" />
+            <input type="hidden" name="mauticform[return]" id="mauticform_demoformid_return" value="" />
+            <input type="hidden" name="mauticform[formName]" id="mauticform_demoformid_name" value="demoformid" />
+          </form>
+        </div>
+        <div class="mini" style="margin-top:8px">By submitting, you agree to be contacted about Sync Chat. Your information is kept confidential.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:var(--bg)">
+    <div class="container">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <details><summary>Can we self‑host Sync Chat?</summary><p>Yes — on‑premise, private cloud, or hybrid. Docker/Kubernetes supported for rapid deployment and scaling.</p></details>
+      <details><summary>Do you support SSO and MFA?</summary><p>Yes. SSO/OAuth, LDAP/AD, and MFA/2FA are supported along with granular RBAC.</p></details>
+      <details><summary>How do you handle compliance?</summary><p>Audit logs, data residency options, retention policies, exports, and encrypted backups help meet compliance needs.</p></details>
+      <details><summary>Can we invite external partners?</summary><p>Yes. Use guest accounts with channel‑level controls, expirations, and auditability.</p></details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container foot-grid">
+      <div>
+        <div class="brand"><img src="Logo.png" alt="Sync Chat Logo"/><strong>SYNCCHAT</strong></div>
+        <p class="mini">© 2025 Sync Chat by AbacusDesk. All rights reserved.</p>
+      </div>
+      <div>
+        <strong>Product</strong>
+        <div class="mini"><a href="#features">Features</a><br/><a href
