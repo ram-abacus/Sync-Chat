@@ -561,12 +561,12 @@ export default function HomePage() {
             <strong className="text-white">Legal</strong>
             <div className="text-xs mt-2 space-y-1">
               <div>
-                <a href="#" className="hover:text-[#2aa160] transition-colors">
+                <a href="/privacy-policy" className="hover:text-[#2aa160] transition-colors">
                   Privacy Policy
                 </a>
               </div>
               <div>
-                <a href="#" className="hover:text-[#2aa160] transition-colors">
+                <a href="/terms-conditions" className="hover:text-[#2aa160] transition-colors">
                   Terms of Service
                 </a>
               </div>

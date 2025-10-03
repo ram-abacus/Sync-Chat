@@ -8,7 +8,7 @@ export default function ThankYouPage() {
       <header className="sticky top-0 z-50 bg-white border-b border-[#ecf1ee]">
         <div className="container flex items-center justify-between h-[72px] px-4 md:px-6">
           <Link className="flex items-center gap-3 font-extrabold text-foreground" href="/">
-            <Image src="/logo.png" alt="Sync Chat Logo" width={140} height={32} className="h-8 w-auto" />
+            <Image src="/logo.png" alt="Sync Chat Logo" width={300} height={100} className="h-15 w-auto" />
           </Link>
           <nav className="hidden md:flex">
             <Link
@@ -205,9 +205,8 @@ export default function ThankYouPage() {
               <Image
                 src="/logo.png"
                 alt="Sync Chat Logo"
-                width={140}
-                height={32}
-                className="h-8 w-auto brightness-0 invert"
+                width={300} height={100}
+                className="h-15 w-auto brightness-0 invert"
               />
             </div>
             <p className="text-xs text-[#7d8c86]">© 2025 Sync Chat by AbacusDesk. All rights reserved.</p>
@@ -251,14 +250,14 @@ export default function ThankYouPage() {
             <strong className="text-white">Legal</strong>
             <div className="text-xs mt-2 space-y-1">
               <div>
-                <Link href="#" className="hover:text-[#2aa160] transition-colors">
+                <a href="/privacy-policy" className="hover:text-[#2aa160] transition-colors">
                   Privacy Policy
-                </Link>
+                </a>
               </div>
               <div>
-                <Link href="#" className="hover:text-[#2aa160] transition-colors">
+                <a href="/terms-conditions" className="hover:text-[#2aa160] transition-colors">
                   Terms of Service
-                </Link>
+                </a>
               </div>
             </div>
           </div>

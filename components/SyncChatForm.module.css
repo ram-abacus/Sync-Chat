@@ -84,16 +84,18 @@
   border-radius: 3px;
   user-select: none;
   transition: all 0.2s ease;
+  background-color: #2aa160 !important;
+  color: #fff !important;
 }
 
 .btnGhost {
   color: #5d6c7c;
-  background-color: #ffffff;
+  background-color: #2aa160;
   border-color: #dddddd;
 }
 
 .btnGhost:hover:not(:disabled) {
-  background-color: #f8f9fa;
+  background-color: #2aa160;
   border-color: #c6c6c6;
 }
 

@@ -8,7 +8,7 @@ export default function SyncChatForm() {
     f_name: '',
     business_email: '',
     phone: '',
-    team_size: '10-50'
+    team_size: ''
   });
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
@@ -16,35 +16,38 @@ export default function SyncChatForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Extract the actual field name from mauticform[field_name]
+    const fieldName = name.replace('mauticform[', '').replace(']', '');
+    
     setFormData(prev => ({
       ...prev,
-      [name.replace('mauticform[', '').replace(']', '')]: value
+      [fieldName]: value
     }));
     
     // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+    if (errors[fieldName]) {
+      setErrors(prev => ({ ...prev, [fieldName]: '' }));
     }
   };
 
   const validateForm = () => {
     const newErrors = {};
     
-    if (!formData.f_name.trim()) {
+    if (!formData.f_name?.trim()) {
       newErrors.f_name = 'This field is required';
     }
     
-    if (!formData.business_email.trim()) {
+    if (!formData.business_email?.trim()) {
       newErrors.business_email = 'This field is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.business_email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.business_email.trim())) {
       newErrors.business_email = 'Please enter a valid email address';
     }
     
-    if (!formData.phone.trim()) {
+    if (!formData.phone?.trim()) {
       newErrors.phone = 'This field is required';
     }
     
-    if (!formData.team_size) {
+    if (!formData.team_size || formData.team_size === '') {
       newErrors.team_size = 'This field is required';
     }
     
@@ -54,6 +57,7 @@ export default function SyncChatForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // Validate form
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -62,32 +66,34 @@ export default function SyncChatForm() {
     
     setIsSubmitting(true);
     setErrors({});
+    setMessage('');
     
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('mauticform[f_name]', formData.f_name);
-      formDataToSend.append('mauticform[business_email]', formData.business_email);
-      formDataToSend.append('mauticform[phone]', formData.phone);
-      formDataToSend.append('mauticform[team_size]', formData.team_size);
-      formDataToSend.append('mauticform[formId]', '14');
-      formDataToSend.append('mauticform[return]', '');
-      formDataToSend.append('mauticform[formName]', 'syncchatform');
-      formDataToSend.append('mauticform[submit]', '1');
-
-      const response = await fetch('https://mautic.abacusdesk.co.in/form/submit?formId=14', {
+      const response = await fetch('/api/submit-form', {
         method: 'POST',
-        body: formDataToSend,
-        mode: 'cors'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        setMessage('Thank you! Your demo request has been submitted successfully.');
-        setFormData({
-          f_name: '',
-          business_email: '',
-          phone: '',
-          team_size: '10-50'
-        });
+      const data = await response.json();
+
+      if (data.success) {
+        // Check if there's a redirect URL from Mautic
+        if (data.redirect) {
+          // Redirect to the URL provided by Mautic
+          window.location.href = data.redirect;
+        } else {
+          // Show success message and clear form if no redirect
+          setMessage('Thank you! Your demo request has been submitted successfully.');
+          setFormData({
+            f_name: '',
+            business_email: '',
+            phone: '',
+            team_size: ''
+          });
+        }
       } else {
         throw new Error('Form submission failed');
       }
@@ -101,9 +107,9 @@ export default function SyncChatForm() {
 
   return (
     <div className={styles.mauticformWrapper}>
-      <form onSubmit={handleSubmit} className={styles.mauticformInnerform}>
+      <form onSubmit={handleSubmit} className={styles.mauticformInnerform} noValidate>
         {message && (
-          <div className={`${styles.mauticformMessage} ${message.includes('error') ? styles.mauticformError : ''}`}>
+          <div className={`${styles.mauticformMessage} ${message.includes('error') || message.includes('Sorry') ? styles.mauticformError : ''}`}>
             {message}
           </div>
         )}
@@ -149,7 +155,7 @@ export default function SyncChatForm() {
         </div>
 
         <div className={`${styles.mauticformRow} ${styles.mauticformRequired}`}>
-            <label htmlFor="phone" className={styles.mauticformLabel}>
+          <label htmlFor="phone" className={styles.mauticformLabel}>
             Phone
           </label>
           <input
@@ -204,4 +210,4 @@ export default function SyncChatForm() {
       </form>
     </div>
   );
-}   
+}
