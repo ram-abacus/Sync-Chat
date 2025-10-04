@@ -1,3 +1,5 @@
+import { MapPin } from "lucide-react";
+
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -328,21 +330,38 @@ export default function PrivacyPolicy() {
               <div className="space-y-2">
                 <div className="flex items-center">
                   <span className="font-semibold mr-2">Email:</span>
-                  <a href="mailto:privacy@getsync.chat" className="underline hover:text-blue-200">privacy@getsync.chat</a>
+                  <a href="mailto:support@getsync.chat" className="underline hover:text-blue-200">support@getsync.chat</a>
                 </div>
                 <div className="flex items-center">
                   <span className="font-semibold mr-2">Support Portal:</span>
-                  <a href="https://getsync.chat/support" className="underline hover:text-blue-200">https://getsync.chat/support</a>
+                  <a href="mailto:support@getsync.chat" className="underline hover:text-blue-200">support@getsync.chat</a>
                 </div>
-                {/* <div className="flex items-start">
+                <div className="flex items-start">
                   <span className="font-semibold mr-2">Address:</span>
-                  <span>[Your Company Address]</span>
-                </div> */}
+                  {/* Addresses */}
+                  <div className="space-y-3 text-xs">
+                    <div className="flex gap-2">
+                      <MapPin className="w-3 h-3 text-white-500 mt-0.5 flex-shrink-0" />
+                      <div className="text-white-400 leading-relaxed">
+                        <div className="font-semibold text-white-300 mb-0.5">India</div>
+                        G1-G3, SSR Corporate Park, 13/6, NH-19, Faridabad, Haryana 121003
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <MapPin className="w-3 h-3 text-white-500 mt-0.5 flex-shrink-0" />
+                      <div className="text-white-400 leading-relaxed">
+                        <div className="font-semibold text-white-300 mb-0.5">Canada</div>
+                        1122 Lorimar Dr, Mississauga, ON L5S 1R8
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               
               <div className="mt-4 pt-4 border-t border-blue-400 text-sm">
-                <div>For GDPR-related inquiries: <a href="mailto:dpo@getsync.chat" className="underline hover:text-blue-200">dpo@getsync.chat</a></div>
-                <div>For CCPA-related inquiries: <a href="mailto:privacy@getsync.chat" className="underline hover:text-blue-200">privacy@getsync.chat</a></div>
+                <div>For GDPR-related inquiries: <a href="mailto:support@getsync.chat" className="underline hover:text-blue-200">support@getsync.chat</a></div>
+                <div>For CCPA-related inquiries: <a href="mailto:support@getsync.chat" className="underline hover:text-blue-200">support@getsync.chat</a></div>
               </div>
             </div>
           </section>

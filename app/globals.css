@@ -171,6 +171,15 @@ p {
 .mauticform-row {
   margin-bottom: 14px;
 }
+address{
+  font-style: normal;
+}
+address ul{
+  width: 80%;
+}
+address ul li{
+  margin-bottom: 5px;
+}
 
 /* Ensure proper contrast for headings */
 h1,

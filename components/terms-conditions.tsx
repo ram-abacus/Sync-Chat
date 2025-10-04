@@ -377,7 +377,7 @@ export default function TermsAndConditions() {
               <div className="space-y-2 text-sm">
                 <div className="flex items-center flex-wrap">
                   <span className="font-semibold mr-2">Email:</span>
-                  <a href="mailto:legal@getsync.chat" className="underline hover:text-indigo-200">legal@getsync.chat</a>
+                  <a href="mailto:support@getsync.chat" className="underline hover:text-indigo-200">support@getsync.chat</a>
                 </div>
                 <div className="flex items-center flex-wrap">
                   <span className="font-semibold mr-2">Support:</span>

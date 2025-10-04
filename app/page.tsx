@@ -3,6 +3,7 @@ import PartnerSlider from "@/components/partner-slider"
 import CookieConsent from "@/components/cookie-consent"
 import SyncChatForm from '@/components/SyncChatForm';
 import IntegrationGrid from "@/components/tools";
+import Footer from "@/components/footer";
 
 export default function HomePage() {
   return (
@@ -20,7 +21,7 @@ export default function HomePage() {
             <a href="#security" className="mx-2.5 text-gray-800 font-semibold hover:text-[#2aa160] transition-colors">
               Security
             </a>
-            <a href="#deploy" className="mx-2.5 text-gray-800 font-semibold hover:text-[#2aa160] transition-colors">
+            <a href="#deployment" className="mx-2.5 text-gray-800 font-semibold hover:text-[#2aa160] transition-colors">
               Deployment
             </a>
             <a
@@ -262,7 +263,7 @@ export default function HomePage() {
       </section>
 
       {/* Deployment options */}
-      <section id="deploy" className="py-12 md:py-20">
+      <section id="deployment" className="py-12 md:py-20">
         <div className="container px-4 md:px-6">
           <h2 className="text-3xl md:text-4xl m-0 mb-3 font-bold">Deploy Your Way</h2>
           <p className="text-[#56635f] max-w-[760px]">
@@ -507,8 +508,10 @@ export default function HomePage() {
         </div>
       </section>
 
+      <Footer />
+
       {/* Footer */}
-      <footer className="bg-[#0d1513] text-[#b8c6c0] py-10">
+      {/* <footer className="bg-[#0d1513] text-[#b8c6c0] py-10">
         <div className="container px-4 md:px-6 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-5">
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -520,6 +523,13 @@ export default function HomePage() {
                 className="h-15 w-auto brightness-0 invert"
               />
             </div>
+            <address className="mb-3">
+              <p><b>Address: </b></p>
+              <ul className="list-unstyled">
+                <li><b>India:</b> G1-G3, SSR Corporate Park, 13/6, NH-19, Faridabad, Haryana 121003</li>
+                <li><b>Canada:</b> 1122 Lorimar Dr, Mississauga, ON L5S 1R8</li>
+              </ul>
+            </address>
             <p className="text-xs text-[#7d8c86]">© 2025 Sync Chat by AbacusDesk. All rights reserved.</p>
           </div>
           <div>
@@ -573,7 +583,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </footer>
+      </footer> */}
 
       <CookieConsent />
     </>
