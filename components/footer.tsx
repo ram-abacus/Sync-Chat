@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Mail, MapPin, X, LinkedinIcon, GithubIcon, YoutubeIcon } from 'lucide-react';
 import Image from "next/image"
+import MauticSubscribe from './SubscribeForm';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -173,24 +174,10 @@ export default function Footer() {
                     Get latest updates.
                   </p>
                   <div className="mb-3">
-                    <div className="flex flex-col gap-1.5">
-                      <div className="relative">
-                        <Mail className="absolute left-2 top-1/2 transform -translate-y-1/2 w-3 h-3 text-gray-500" />
-                        <input
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Enter your email"
-                          className="w-full pl-8 pr-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        />
-                      </div>
-                      <button
-                        onClick={handleSubscribe}
-                        className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-600 text-white py-2 rounded-lg text-xs font-semibold transition-all duration-300 hover:scale-105"
-                      >
-                        Subscribe
-                      </button>
-                    </div>
+
+<MauticSubscribe />
+
+                    
                   </div>
 
                   {/* Trust Badge */}
