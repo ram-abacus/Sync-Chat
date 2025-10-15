@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import styles from './SyncChatForm.module.css';
 
-export default function SyncChatForm() {
+export default function SyncChatForm({ redirectUrl = '/thank-you' }) {
   const [formData, setFormData] = useState({
     f_name: '',
     business_email: '',
@@ -16,7 +16,6 @@ export default function SyncChatForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Extract the actual field name from mauticform[field_name]
     const fieldName = name.replace('mauticform[', '').replace(']', '');
     
     setFormData(prev => ({
@@ -24,7 +23,6 @@ export default function SyncChatForm() {
       [fieldName]: value
     }));
     
-    // Clear error when user starts typing
     if (errors[fieldName]) {
       setErrors(prev => ({ ...prev, [fieldName]: '' }));
     }
@@ -57,7 +55,6 @@ export default function SyncChatForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate form
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -69,6 +66,8 @@ export default function SyncChatForm() {
     setMessage('');
     
     try {
+      console.log('Submitting form data:', formData);
+      
       const response = await fetch('/api/submit-form', {
         method: 'POST',
         headers: {
@@ -77,30 +76,28 @@ export default function SyncChatForm() {
         body: JSON.stringify(formData),
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
 
       if (data.success) {
-        // Check if there's a redirect URL from Mautic
-        if (data.redirect) {
-          // Redirect to the URL provided by Mautic
-          window.location.href = data.redirect;
-        } else {
-          // Show success message and clear form if no redirect
-          setMessage('Thank you! Your demo request has been submitted successfully.');
-          setFormData({
-            f_name: '',
-            business_email: '',
-            phone: '',
-            team_size: ''
-          });
-        }
+        // Always redirect after successful submission
+        const finalRedirectUrl = data.redirect || redirectUrl;
+        console.log('Redirecting to:', finalRedirectUrl);
+        
+        // Small delay to ensure form submission is processed
+        setTimeout(() => {
+          window.location.href = finalRedirectUrl;
+        }, 100);
+        
+        // Show success message while redirecting
+        setMessage('Thank you! Redirecting...');
       } else {
-        throw new Error('Form submission failed');
+        throw new Error(data.message || 'Form submission failed');
       }
     } catch (error) {
       console.error('Form submission error:', error);
       setMessage('Sorry, there was an error submitting your request. Please try again.');
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -126,6 +123,7 @@ export default function SyncChatForm() {
             className={styles.mauticformInput}
             value={formData.f_name}
             onChange={handleChange}
+            disabled={isSubmitting}
           />
           {errors.f_name && (
             <span className={styles.mauticformErrormsg}>
@@ -146,6 +144,7 @@ export default function SyncChatForm() {
             className={styles.mauticformInput}
             value={formData.business_email}
             onChange={handleChange}
+            disabled={isSubmitting}
           />
           {errors.business_email && (
             <span className={styles.mauticformErrormsg}>
@@ -166,6 +165,7 @@ export default function SyncChatForm() {
             className={styles.mauticformInput}
             value={formData.phone}
             onChange={handleChange}
+            disabled={isSubmitting}
           />
           {errors.phone && (
             <span className={styles.mauticformErrormsg}>
@@ -184,6 +184,7 @@ export default function SyncChatForm() {
             className={styles.mauticformSelectbox}
             value={formData.team_size}
             onChange={handleChange}
+            disabled={isSubmitting}
           >
             <option value="">Select team size</option>
             <option value="10-50">10-50</option>
