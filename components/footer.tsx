@@ -197,14 +197,14 @@ export default function Footer() {
                   <div className="text-gray-400">
                     © 2025 Sync Chat by AbacusDesk. All rights reserved.
                   </div>
-                  <div className="flex gap-4">
+                  {/* <div className="flex gap-4">
                     <a href="#" className="text-gray-400 hover:text-white transition-colors">
                       Sitemap
                     </a>
                     <a href="#" className="text-gray-400 hover:text-white transition-colors">
                       Status
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
