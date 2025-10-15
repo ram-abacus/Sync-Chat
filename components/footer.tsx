@@ -80,12 +80,11 @@ export default function Footer() {
                     <p>
                         <strong className="text-white font-semibold mb-5">Product</strong>
                     </p>
-                    <ul className="space-y-2">
                       <ul className="space-y-2">
   {[
-    { title: 'Features', link: '#features' },
-    { title: 'Integrations', link: '#integrations' },
-    { title: 'Deployment', link: '#deployment' }
+    { title: 'Features', link: '/#features' },
+    { title: 'Integrations', link: '/#integrations' },
+    { title: 'Deployment', link: '/#deployment' }
   ].map((item, i) => (
     <li key={i}>
       <a
@@ -105,7 +104,6 @@ export default function Footer() {
   ))}
 </ul>
 
-                    </ul>
                   </div>
 
                   {/* Company */}
